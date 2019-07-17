@@ -8,16 +8,17 @@ const AddStory = ({dispatch}) => {
         <div>
             <form
                 onSubmit={e => {
+                    console.log('test asd')
                     e.preventDefault();
                     if (!input.value)
                         return;
                     dispatch(addStory(input.value));
                     input.value = ''
                 }}>
-                <input ref={v => {
+                <input name="input" ref={v => {
                     input = v
                 }}/>
-                <button type='submit'>addStory</button>
+                <button data-testid="test" type='submit'>addStory</button>
             </form>
         </div>
     )
