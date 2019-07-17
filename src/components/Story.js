@@ -4,9 +4,9 @@ import AddTaskDialog from './AddTaskDialog';
 import Task from '../containers/TaskContainer';
 
 const Story = (props) => {
-    const [open, setOpen] = React.useState('false')
+    const [open, setOpen] = React.useState(false)
     const tasks = props.tasks
-    const closeDialog = () => setOpen('false')
+    const closeDialog = () => setOpen(false)
     // useEffect(() => {
     //     return () => {
     //         fi
@@ -18,7 +18,7 @@ const Story = (props) => {
             <div style={{display: 'flex'}}>
                 <span style={{width: '20%'}}>
                 <h1>{props.title}</h1>
-                <button onClick={() => setOpen(true)}>Add a task</button>
+                <button data-testid='dialog-open-button' onClick={() => setOpen(true)}>Add a task</button>
                 </span>
                 {
                     TaskStatusEnum.map((taskStatus) => {

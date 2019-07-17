@@ -42,7 +42,7 @@ export default function AddTaskDialog(props) {
 
     return (
         <div>
-            <Dialog open={open} onClose={props.closeDialog()} aria-labelledby="form-dialog-title">
+            <Dialog data-testid="AddTaskDialog" open={open} onClose={props.closeDialog()} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title"> Add a task</DialogTitle>
                 <DialogContent
                     style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
