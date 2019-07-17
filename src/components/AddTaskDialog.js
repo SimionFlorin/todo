@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Select, MenuItem } from '@material-ui/core';
+import { TaskStatusEnum } from '../actions';
 
 export default function AddTaskDialog(props) {
 
@@ -41,11 +42,6 @@ const [status,setStatus] = React.useState('NEW')
   }
   
 
-//  useEffect(() => {
-//      return () => {
-//          if()
-//      };
-//  }, [input])
 useEffect(() => {
   return () => {
     setOpen(props.open)
@@ -54,9 +50,6 @@ useEffect(() => {
 
   return (
     <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button> */}
       <Dialog open={open} onClose={props.closeDialog()} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">   Add a task</DialogTitle>
         <DialogContent style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
@@ -70,10 +63,6 @@ useEffect(() => {
             name='description' value={description} onChange={(e)=>handleChange(e)}
             label='description'
           />
-          {/* <TextField
-            name='taskType' value={taskType} onChange={(e)=>handleChange(e) }
-            label='taskType'
-          /> */}
             <Select
               name='taskType'
               value={taskType}
@@ -93,10 +82,9 @@ useEffect(() => {
               onChange={(e)=>handleChange(e)}
               label='Status'
             >
-              <MenuItem value='NEW'>NEW</MenuItem>
-              <MenuItem value='ACTIVE'>ACTIVE</MenuItem>
-              <MenuItem value='RESOLVED'>RESOLVED</MenuItem>
-              <MenuItem value='CLOSED'>CLOSED</MenuItem>
+              {TaskStatusEnum.map((status)=>(
+                <MenuItem value={status}>{status}</MenuItem>
+              ))}
         </Select>
         {/* <Select
               name='story'

@@ -16,7 +16,7 @@ import { Divider } from '@material-ui/core';
         {console.log(stories)}
         {
             TaskStatusEnum.map((taskStatus)=>(
-                <span style={{width:'20%'}}>
+                <span style={{width:'20%'}} key={taskStatus}>
                     <h2>{taskStatus}</h2>
                 </span>
             ))
@@ -31,7 +31,6 @@ import { Divider } from '@material-ui/core';
                             <Story key={story.id} StoryId={story.id} 
                             tasks={filteredTasks} title={story.title}
                              addTask={addTask} 
-                            // {...filteredTasks}
                             />
                             <Divider/>
                         </div>)
