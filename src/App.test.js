@@ -1,43 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux'
-import './index.css';
-import thunk from "redux-thunk"
-import App from './App';
-import {compose, applyMiddleware, createStore} from 'redux'
-import rootReducer from './reducers/index.js' //ToDo: creare reducer
-import stories from './reducers/stories';
+import makeApp from './util/testing';
+import makeSpyMiddleware from 'spy-middleware';
+import {createStore} from './config';
+import {mount} from 'enzyme';
+import {configure} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import 'raf/polyfill';
 
-const composeEnhancers =
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-            // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-        }) : compose;
+configure({adapter: new Adapter()});
 
-const enhancer = composeEnhancers(
-    applyMiddleware(thunk),
-    // other store enhancers if any
-);
-const store = createStore(rootReducer, enhancer);
+describe('its working', () => {
 
-test('test1', () => {
-    expect(1).toBe(1)
-})
-const story1 = {id: 1, title: 'story1', taskIds: [1]}
-test('addStory', () => {
-    expect(
-        stories([story1], {type: 'ADD_STORY', id: 2, title: 'story2'})
-    ).toStrictEqual([{id: 2, title: 'story2', taskIds: []}, story1])
-})
-
-
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-        <Provider store={store}>
-            <App/>
-        </Provider>, div);
-    ReactDOM.unmountComponentAtNode(div);
+    it('should render this', async () => {
+        const spyMiddleware = makeSpyMiddleware();
+        const store = createStore(spyMiddleware);
+        const app = mount(makeApp(() => <div>hello</div>), store);
+        store.dispatch({type: 'Hello'});
+        console.log(await spyMiddleware.until('Hello'));
+        console.log(app.debug());
+    });
 });
-
