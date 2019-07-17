@@ -1,62 +1,70 @@
 import React from 'react'
-import { Dialog, DialogTitle, DialogContentText, DialogContent, DialogActions, Divider, Select, MenuItem } from '@material-ui/core';
-import { TaskStatusEnum, TaskStatus} from '../actions';
-import { updateTaskStatus } from './../actions/index';
-import { PropTypes } from 'prop-types';
+import {
+    Dialog,
+    DialogTitle,
+    DialogContentText,
+    DialogContent,
+    DialogActions,
+    Divider,
+    Select,
+    MenuItem
+} from '@material-ui/core';
+import {TaskStatusEnum} from '../actions';
 
-const Task=({title,description,taskType,status,updateTaskStatusDispatch,id})=>{
+const Task = ({title, description, taskType, status, updateTaskStatusDispatch, id}) => {
 
-    const [open,setOpen]=React.useState('false')
-    const [stateStatus,setStateStatus]=React.useState(status)
-    
-    const handleChange=(e)=>{
-        if(e.target.name==='status')
+    const [open, setOpen] = React.useState('false')
+    const [stateStatus, setStateStatus] = React.useState(status)
+
+    const handleChange = (e) => {
+        if (e.target.name === 'status')
             setStateStatus(e.target.value)
     }
 
-    return(
+    return (
         <React.Fragment>
-        <li onClick={()=>setOpen(true)}>
-            {title}
-        </li>
-        <Dialog open={open===true} onClose={()=>setOpen('false')}>
-        <DialogContent>
-            <DialogTitle>
+            <li onClick={() => setOpen(true)}>
                 {title}
-            </DialogTitle>
-            <DialogContentText>
-                Description: {description}
-                <Divider/>
-                Type: {taskType}
-                <Divider/>
-                <Select
-                    name='status'
-                    value={status}
-                    onChange={(e)=>handleChange(e)}
-                    label='Status'
-                    >{TaskStatusEnum.map((TaskStatus)=>(
-                        <MenuItem value={TaskStatus}>{TaskStatus}</MenuItem>
-                    ))}
-                </Select>
-            </DialogContentText>
-            <DialogActions>
-                <button onClick={()=>setOpen('false')}>
-                    Cancel
-                </button>
-                <button onClick={()=>{updateTaskStatusDispatch(id,stateStatus)
-                setOpen('false')
-                }}>
-                    Change Status
-                </button>
-                {/* <button onClick={()=>console.log(props)}>
+            </li>
+            <Dialog open={open === true} onClose={() => setOpen('false')}>
+                <DialogContent>
+                    <DialogTitle>
+                        {title}
+                    </DialogTitle>
+                    <DialogContentText>
+                        Description: {description}
+                        <Divider/>
+                        Type: {taskType}
+                        <Divider/>
+                        <Select
+                            name='status'
+                            value={status}
+                            onChange={(e) => handleChange(e)}
+                            label='Status'
+                        >{TaskStatusEnum.map((TaskStatus) => (
+                            <MenuItem value={TaskStatus}>{TaskStatus}</MenuItem>
+                        ))}
+                        </Select>
+                    </DialogContentText>
+                    <DialogActions>
+                        <button onClick={() => setOpen('false')}>
+                            Cancel
+                        </button>
+                        <button onClick={() => {
+                            updateTaskStatusDispatch(id, stateStatus)
+                            setOpen('false')
+                        }}>
+                            Change Status
+                        </button>
+                        {/* <button onClick={()=>console.log(props)}>
                     testareCLG
                     </button> */}
-            </DialogActions>
-        </DialogContent>
-    </Dialog>
-    </React.Fragment>
+                    </DialogActions>
+                </DialogContent>
+            </Dialog>
+        </React.Fragment>
     )
-} 
+}
 
 
 // Task.propTypes ={
