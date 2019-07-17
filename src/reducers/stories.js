@@ -1,3 +1,4 @@
+const initialState = [];
 
 const stories = (state = [], action) => {
     switch (action.type) {
@@ -5,11 +6,11 @@ const stories = (state = [], action) => {
     case 'ADD_STORY':
         console.log('creare story')
         console.log(state)
-        return [ ...state, {
+        return [  {
             id:action.id,
             title:action.title,
             taskIds:[]
-        } ]
+        }, ...state, ]
     case 'ADD_TASK':
         let modifiedStory=state.find((story)=>story.id===action.storyId)
         console.log('adaugare task la obiect')
@@ -18,10 +19,10 @@ const stories = (state = [], action) => {
         modifiedStory.taskIds=[action.id]
         else modifiedStory.taskIds.push(action.id)
         console.log('modifiedStory: ' , modifiedStory);
-        let newState=state.filter((story)=>story.id!==action.storyId)
+        const newState=state.filter((story)=>story.id!==action.storyId)
         return [
+            modifiedStory,
             ...newState,
-            modifiedStory
         ]
     default:
         return state

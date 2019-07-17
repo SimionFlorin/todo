@@ -11,18 +11,18 @@
                 id:action.id,
                 title:action.task.title,
                 description:action.task.description,
-                type:action.task.taskType,
+                taskType:action.task.taskType,
                 status:action.task.status,
                 // story:action.task.status,
             }
          ]
     case 'UPDATE_STATUS':
-        let updatedTask=state.find((task)=>task.id===action.taskId)
-        updatedTask.status=action.status
-        let newState=state.filter((task)=>task.id!==action.taskId)
-        console.log(updatedTask)
+        // let updatedTask=state.find((task)=>task.id===action.taskId)
+        // updatedTask.status=action.status
+        const newState=state.filter((task)=>task.id!==action.taskId)
        return [
-           ...newState,updatedTask
+           ...newState,
+           Object.assign({},state.find((task)=>task.id===action.taskId),{status:action.status})
        ]
     default:
         return state

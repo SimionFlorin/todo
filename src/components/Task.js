@@ -4,30 +4,30 @@ import { TaskStatusEnum, TaskStatus} from '../actions';
 import { updateTaskStatus } from './../actions/index';
 import { PropTypes } from 'prop-types';
 
-const Task=(props)=>{
+const Task=({title,description,taskType,status,updateTaskStatusDispatch,id})=>{
 
     const [open,setOpen]=React.useState('false')
-    const [status,setStatus]=React.useState(props.status)
+    const [stateStatus,setStateStatus]=React.useState(status)
     
     const handleChange=(e)=>{
         if(e.target.name==='status')
-            setStatus(e.target.value)
+            setStateStatus(e.target.value)
     }
 
     return(
         <React.Fragment>
         <li onClick={()=>setOpen(true)}>
-            {props.title}
+            {title}
         </li>
         <Dialog open={open===true} onClose={()=>setOpen('false')}>
         <DialogContent>
             <DialogTitle>
-                {props.title}
+                {title}
             </DialogTitle>
             <DialogContentText>
-                Description: {props.description}
+                Description: {description}
                 <Divider/>
-                Type: {props.taskType}
+                Type: {taskType}
                 <Divider/>
                 <Select
                     name='status'
@@ -43,7 +43,7 @@ const Task=(props)=>{
                 <button onClick={()=>setOpen('false')}>
                     Cancel
                 </button>
-                <button onClick={()=>{props.updateTaskStatusDispatch(props.id,status)
+                <button onClick={()=>{updateTaskStatusDispatch(id,stateStatus)
                 setOpen('false')
                 }}>
                     Change Status

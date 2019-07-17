@@ -11,7 +11,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addTask: (id,task)=>dispatch(addTaskToStory(id,task)),
-    updateTaskStatusDispatch: (id,status)=>dispatch(updateTaskStatus(id,status))
     })
 
 export default connect(

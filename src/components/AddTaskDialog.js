@@ -21,12 +21,12 @@ const [status,setStatus] = React.useState('NEW')
   }
 
   function handleClose() {
-    // props.closeDialog()
+    props.closeDialog()
     setOpen(false);
   }
     const handleChange=(e)=>{
-      let name=e.target.name
-      let value=e.target.value
+      const name=e.target.name
+      const value=e.target.value
       if(name==='title')
         setTitle(value)
       if(name==='description')

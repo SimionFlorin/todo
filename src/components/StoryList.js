@@ -2,9 +2,10 @@ import React from 'react'
 import Story from './Story';
 import { TaskStatusEnum } from '../actions';
 import PropTypes  from 'prop-types';
+import { Divider } from '@material-ui/core';
 // console.log(this.props);
 
- const StoryList = ({stories,tasks,addTask,updateTaskStatusDispatch}) =>{
+ const StoryList = ({stories,tasks,addTask}) =>{
 
      return(
     <div style={{width:'100%'}}>
@@ -21,16 +22,18 @@ import PropTypes  from 'prop-types';
             ))
         }
         </div>
+        <Divider/>
         <div>
         {stories&&stories.map((story)=>{
                 console.log('merge')
-                let filteredTasks=tasks.filter((task)=>story.taskIds.includes(task.id))
+                const filteredTasks=tasks.filter((task)=>story.taskIds.includes(task.id))
                 return(<div>
                             <Story key={story.id} StoryId={story.id} 
                             tasks={filteredTasks} title={story.title}
-                             addTask={addTask} updateTaskStatusDispatch={updateTaskStatusDispatch}
+                             addTask={addTask} 
                             // {...filteredTasks}
                             />
+                            <Divider/>
                         </div>)
         })}
         </div>

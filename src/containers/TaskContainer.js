@@ -1,13 +1,16 @@
-// import { connect } from 'react-redux'
-// import { dispatch } from 'rxjs/internal/observable/range';
-// import { updateTaskStatus } from '../actions';
-// import Task from './../components/Task';
 
+import { updateTaskStatus } from '../actions';
 
+import { connect } from 'react-redux';
+import Task from '../components/Task';
 
-// const mapDispatchToProps = dispatch => ({
-//     updateTaskStatusDispatch: (id,status)=>dispatch(updateTaskStatus(id,status))
-// })
+const mapStateToProps = null;
 
-// export default
-// connect(mapDispatchToProps)(Task)
+const mapDispatchToProps = dispatch => ({
+    updateTaskStatusDispatch: (id,status)=>dispatch(updateTaskStatus(id,status))
+    })
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Task)

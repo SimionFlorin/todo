@@ -4,11 +4,11 @@ import { TaskStatusEnum, addStory } from './../actions/index';
 import AddTaskDialog from './AddTaskDialog';
 import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core/Button';
-import Task from './Task';
+import Task from '../containers/TaskContainer';
 
 const Story = (props)=>{
     const [open, setOpen] = React.useState('false')
-    let tasks=props.tasks
+    const tasks=props.tasks
     const closeDialog=()=>setOpen('false')
     // useEffect(() => {
     //     return () => {
@@ -25,7 +25,7 @@ const Story = (props)=>{
                 </span>
                 {
                 TaskStatusEnum.map((taskStatus)=>{
-                    let filteredTasks=tasks.filter((task)=>task.status===taskStatus)
+                    const filteredTasks=tasks.filter((task)=>task.status===taskStatus)
                     return(
                     <span style={{width:'20%'}}>
                         <ul>
@@ -34,7 +34,8 @@ const Story = (props)=>{
                                 (
                                     <Task title={filteredTask.title} description={filteredTask.description}
                                         taskType={filteredTask.taskType} status={filteredTask.status}
-                                         id={filteredTask.id} updateTaskStatusDispatch={props.updateTaskStatusDispatch}
+                                         id={filteredTask.id} 
+                                         updateTaskStatusDispatch={props.updateTaskStatusDispatch}
                                     />
                                 )
                             )
