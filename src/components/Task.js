@@ -26,7 +26,7 @@ const Task = ({title, description, taskType, status, updateTaskStatusDispatch, i
             <li onClick={() => setOpen(true)}>
                 {title}
             </li>
-            <Dialog open={open === true} onClose={() => setOpen('false')}>
+            <Dialog open={open === true} data-testid="UpdateTaskStatusDialog" onClose={() => setOpen('false')}>
                 <DialogContent>
                     <DialogTitle>
                         {title}
@@ -36,15 +36,16 @@ const Task = ({title, description, taskType, status, updateTaskStatusDispatch, i
                         <Divider/>
                         Type: {taskType}
                         <Divider/>
-                        <Select
+                        <select
+                        data-testid="status"
                             name='status'
                             value={status}
                             onChange={(e) => handleChange(e)}
                             label='Status'
                         >{TaskStatusEnum.map((TaskStatus) => (
-                            <MenuItem value={TaskStatus}>{TaskStatus}</MenuItem>
+                            <option value={TaskStatus}>{TaskStatus}</option>
                         ))}
-                        </Select>
+                        </select>
                     </DialogContentText>
                     <DialogActions>
                         <button onClick={() => setOpen('false')}>
@@ -56,9 +57,6 @@ const Task = ({title, description, taskType, status, updateTaskStatusDispatch, i
                         }}>
                             Change Status
                         </button>
-                        {/* <button onClick={()=>console.log(props)}>
-                    testareCLG
-                    </button> */}
                     </DialogActions>
                 </DialogContent>
             </Dialog>

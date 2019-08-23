@@ -29,7 +29,7 @@ const StoryList = ({stories, tasks, addTask}) => {
                     return (<div>
                         <Story key={story.id} StoryId={story.id}
                                tasks={filteredTasks} title={story.title}
-                               addTask={addTask}
+                               addTask={addTask} data-testid={story.title}
                             // {...filteredTasks}
                         />
                         <Divider/>

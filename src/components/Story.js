@@ -31,8 +31,7 @@ const Story = (props) => {
                                 (
                                     <Task title={filteredTask.title} description={filteredTask.description}
                                           taskType={filteredTask.taskType} status={filteredTask.status}
-                                          id={filteredTask.id}
-                                          updateTaskStatusDispatch={props.updateTaskStatusDispatch}
+                                          id={filteredTask.id} data-testid={filteredTask.title}
                                     />
                                 )
                             )
